@@ -18,7 +18,7 @@ jobs:
 
       - name: Install WiiU development packages
         run: |
-          pacman -Sy --noconfirm wut
+          dkp-pacman -Sy --noconfirm wut
 
       - name: Build
         run: make
