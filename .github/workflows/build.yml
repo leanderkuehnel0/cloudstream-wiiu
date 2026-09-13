@@ -1,4 +1,4 @@
-name: Build WiiU Homebrew
+name: Build WiiU Homebrew and Forwarder
 
 on:
   push:
@@ -20,11 +20,23 @@ jobs:
         run: |
           dkp-pacman -Sy --noconfirm wut
 
-      - name: Build
-        run: make
+      - name: Build homebrew
+        run: |
+          make -C .
+        # The homebrew Makefile is in the repo root
 
-      - name: Upload artifact
+      - name: Build forwarder
+        run: |
+          make -C forwarder
+
+      - name: Upload homebrew artifact
         uses: actions/upload-artifact@v4
         with:
           name: hello_world_wuhb
           path: hello_world.wuhb
+
+      - name: Upload forwarder artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello_world_forwarder_rpx
+          path: forwarder/forwarder.rpx
